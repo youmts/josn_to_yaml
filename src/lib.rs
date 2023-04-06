@@ -1,4 +1,3 @@
-use std::collections::HashMap;
 use serde_json::Value;
 use thiserror::Error;
 
@@ -11,8 +10,8 @@ pub enum LibError {
 }
 
 pub fn json_to_yaml(json_string: &str) -> Result<String, LibError> {
-    let value_hash_map: HashMap<String, Value> = serde_json::from_str(json_string)?;
-    let yaml_string = serde_yaml::to_string(&value_hash_map)?;
+    let value: Value = serde_json::from_str(json_string)?;
+    let yaml_string = serde_yaml::to_string(&value)?;
 
     Ok(yaml_string)
 }
