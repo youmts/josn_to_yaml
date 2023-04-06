@@ -10,8 +10,8 @@ pub enum LibError {
     SerdeYaml(#[from] serde_yaml::Error),
 }
 
-pub fn json_to_yaml(json_string: String) -> Result<String, LibError> {
-    let value_hash_map: HashMap<String, Value> = serde_json::from_str(&json_string)?;
+pub fn json_to_yaml(json_string: &str) -> Result<String, LibError> {
+    let value_hash_map: HashMap<String, Value> = serde_json::from_str(json_string)?;
     let yaml_string = serde_yaml::to_string(&value_hash_map)?;
 
     Ok(yaml_string)
